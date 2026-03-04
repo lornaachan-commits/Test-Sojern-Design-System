@@ -1,0 +1,931 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2822
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 // sojern-design-system/components/index.jsx\
+import \{ useState \} from "react";\
+\
+const tokens = \{\
+  color: \{\
+    brandPrimary: "#E35F3E",\
+    brandSecondary: "#242452",\
+    brandTertiary: "#647D94",\
+    page: "#F8F8F8",\
+    container: "#FFFFFF",\
+    containerWithin: "#F8F8F8",\
+    inputDefault: "#FFFFFF",\
+    inputDisabled: "#F8F8F8",\
+    modal: "#FFFFFF",\
+    modalBackground: "#5C6778",\
+    selected: "#F5F1EE",\
+    headerText: "#242452",\
+    bodyText: "#333333",\
+    bodyWhite: "#FFFFFF",\
+    disabledText: "#666666",\
+    buttonColor: "#FFFFFF",\
+    buttonWhite: "#26374E",\
+    verticalNav: "#FFFFFF",\
+    verticalBg: "#242452",\
+    verticalActiveBorder: "#E35F3E",\
+    verticalActiveBg: "#17212F",\
+    verticalHover: "#17212F",\
+    stroke: "#B2BECA",\
+    focus: "#1362F7",\
+    disabled: "#E6E6E6",\
+    neutral100: "#F0F2F4",\
+    neutral200: "#E0E5EA",\
+    neutral300: "#B2BECA",\
+    neutral400: "#93A4B4",\
+    neutral600: "#506476",\
+    neutral800: "#17212F",\
+    successBg: "#E2F9F1",\
+    successFg: "#488F31",\
+    criticalBg: "#F9DFD8",\
+    criticalFg: "#C86400",\
+    warningBg: "#FEF7E3",\
+    warningFg: "#E02F2F",\
+    infoBg: "#CBE8FF",\
+    infoFg: "#005A9E",\
+    negativeFg: "#E02F2F",\
+    primaryEnabled: "#E35F3E",\
+    primaryHover: "#B64C32",\
+    primaryActive: "#883925",\
+    secondaryBorder: "#242452",\
+    secondaryHover: "#647D94",\
+    secondaryActive: "#17212F",\
+    ghostHover: "#E6E6E6",\
+    ghostActive: "#CCCCCC",\
+    linkEnabled: "#1362F7",\
+    linkHover: "#0D53D6",\
+    destructiveEnabled: "#E02F2F",\
+    destructiveHover: "#B32525",\
+    destructiveActive: "#861C1C",\
+    specialEnabled: "#26374E",\
+    specialHover: "#647D94",\
+    specialActive: "#17212F",\
+    tabActive: "#E35F3E",\
+    tabHover: "#26374E",\
+    tabDefault: "#666666",\
+  \},\
+  spacing: \{ none: 0, xs: 4, sm: 8, md: 16, lg: 24, xl: 32, xxl: 40 \},\
+  radius: \{ button: 5, card: 10, container: 10, pill: 20 \},\
+  shadow: \{\
+    light: "3px 3px 20px 0px rgba(0,0,0,0.15)",\
+    dark: "0px 0px 20px 4px rgba(0,0,0,0.15)",\
+    hover: "5px 5px 20px 0px rgba(0,0,0,0.30)",\
+  \},\
+  font: \{\
+    title1: \{ fontFamily: "Lato, sans-serif", fontSize: 32, fontWeight: 500 \},\
+    title2: \{ fontFamily: "Lato, sans-serif", fontSize: 26, fontWeight: 400, lineHeight: "120%" \},\
+    title3: \{ fontFamily: "Lato, sans-serif", fontSize: 18, fontWeight: 500, lineHeight: "120%" \},\
+    title4: \{ fontFamily: "Inter, sans-serif", fontSize: 16, fontWeight: 700, lineHeight: "120%" \},\
+    bodyRegular: \{ fontFamily: "Inter, sans-serif", fontSize: 14, fontWeight: 400, lineHeight: "140%", letterSpacing: "0.2px" \},\
+    bodyBold: \{ fontFamily: "Inter, sans-serif", fontSize: 14, fontWeight: 700, lineHeight: "140%", letterSpacing: "0.2px" \},\
+    bodySmall: \{ fontFamily: "Inter, sans-serif", fontSize: 12, fontWeight: 400, lineHeight: "140%", letterSpacing: "0.2px" \},\
+    bodySmallBold: \{ fontFamily: "Inter, sans-serif", fontSize: 12, fontWeight: 700, lineHeight: "140%", letterSpacing: "0.2px" \},\
+    tooltip: \{ fontFamily: "Inter, sans-serif", fontSize: 10, fontWeight: 400, lineHeight: "140%", letterSpacing: "0.2px" \},\
+    tooltipMedium: \{ fontFamily: "Inter, sans-serif", fontSize: 10, fontWeight: 500, lineHeight: "140%", letterSpacing: "0.2px" \},\
+  \},\
+\};\
+\
+// \uc0\u9472 \u9472 \u9472  BUTTON \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \
+const buttonStyles = \{\
+  special: \{\
+    background: tokens.color.primaryEnabled, color: tokens.color.buttonColor,\
+    hover: \{ background: tokens.color.primaryHover \},\
+    active: \{ background: tokens.color.primaryActive \},\
+  \},\
+  primary: \{\
+    background: tokens.color.specialEnabled, color: tokens.color.buttonColor,\
+    hover: \{ background: tokens.color.specialHover \},\
+    active: \{ background: tokens.color.specialActive \},\
+  \},\
+  secondary: \{\
+    background: tokens.color.container, color: tokens.color.buttonWhite,\
+    border: `1px solid $\{tokens.color.secondaryBorder\}`,\
+    hover: \{ background: tokens.color.secondaryHover, color: tokens.color.buttonColor \},\
+    active: \{ background: tokens.color.secondaryActive, color: tokens.color.buttonColor \},\
+  \},\
+  ghost: \{\
+    background: "transparent", color: tokens.color.bodyText,\
+    hover: \{ background: tokens.color.ghostHover \},\
+    active: \{ background: tokens.color.ghostActive \},\
+  \},\
+  destructive: \{\
+    background: tokens.color.destructiveEnabled, color: tokens.color.buttonColor,\
+    hover: \{ background: tokens.color.destructiveHover \},\
+    active: \{ background: tokens.color.destructiveActive \},\
+  \},\
+  link: \{\
+    background: "transparent", color: tokens.color.linkEnabled,\
+    hover: \{ color: tokens.color.linkHover, textDecoration: "underline" \},\
+    active: \{ color: tokens.color.linkHover \},\
+  \},\
+\};\
+\
+const sizeStyles = \{\
+  lg: \{ height: 40, padding: "0 20px", fontSize: 14, fontWeight: 700 \},\
+  md: \{ height: 36, padding: "0 16px", fontSize: 14, fontWeight: 700 \},\
+  sm: \{ height: 28, padding: "0 12px", fontSize: 12, fontWeight: 400 \},\
+\};\
+\
+export function Button(\{ variant = "special", size = "md", label = "Button", leftIcon, rightIcon, disabled, onClick \}) \{\
+  const [hovered, setHovered] = useState(false);\
+  const [pressed, setPressed] = useState(false);\
+  const base = buttonStyles[variant];\
+  const sz = sizeStyles[size];\
+  const stateStyle = disabled ? \{ background: tokens.color.disabled, color: tokens.color.disabledText, border: "none", cursor: "not-allowed" \}\
+    : pressed ? \{ ...base, ...base.active \}\
+    : hovered ? \{ ...base, ...base.hover \}\
+    : base;\
+\
+  return (\
+    <button\
+      disabled=\{disabled\}\
+      onClick=\{onClick\}\
+      onMouseEnter=\{() => setHovered(true)\}\
+      onMouseLeave=\{() => \{ setHovered(false); setPressed(false); \}\}\
+      onMouseDown=\{() => setPressed(true)\}\
+      onMouseUp=\{() => setPressed(false)\}\
+      style=\{\{\
+        display: "inline-flex", alignItems: "center", gap: tokens.spacing.xs,\
+        height: sz.height, padding: sz.padding,\
+        fontSize: sz.fontSize, fontWeight: sz.fontWeight,\
+        fontFamily: "Inter, sans-serif",\
+        borderRadius: tokens.radius.button,\
+        border: stateStyle.border || "none",\
+        background: stateStyle.background,\
+        color: stateStyle.color,\
+        cursor: disabled ? "not-allowed" : "pointer",\
+        transition: "all 0.15s ease",\
+        textDecoration: stateStyle.textDecoration || "none",\
+        whiteSpace: "nowrap",\
+      \}\}\
+    >\
+      \{leftIcon && <span style=\{\{ display: "flex", alignItems: "center" \}\}>\{leftIcon\}</span>\}\
+      \{label\}\
+      \{rightIcon && <span style=\{\{ display: "flex", alignItems: "center" \}\}>\{rightIcon\}</span>\}\
+    </button>\
+  );\
+\}\
+\
+// \uc0\u9472 \u9472 \u9472  CHIP \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \
+const chipVariants = \{\
+  warning: \{ bg: tokens.color.warningBg \},\
+  success: \{ bg: tokens.color.successBg \},\
+  error: \{ bg: tokens.color.criticalBg \},\
+  active: \{ bg: tokens.color.infoBg \},\
+  information: \{ bg: tokens.color.neutral200 \},\
+\};\
+\
+export function Chip(\{ variant = "information", label = "Invoice", dismissible, onDismiss \}) \{\
+  const \{ bg \} = chipVariants[variant] || chipVariants.information;\
+  return (\
+    <span style=\{\{\
+      display: "inline-flex", alignItems: "center", gap: tokens.spacing.xs,\
+      background: bg, color: tokens.color.bodyText,\
+      borderRadius: tokens.radius.pill,\
+      padding: `$\{tokens.spacing.xs\}px $\{tokens.spacing.sm\}px`,\
+      ...tokens.font.bodySmall,\
+    \}\}>\
+      \{label\}\
+      \{dismissible && (\
+        <span onClick=\{onDismiss\} style=\{\{ cursor: "pointer", fontSize: 10, lineHeight: 1 \}\}>\uc0\u10005 </span>\
+      )\}\
+    </span>\
+  );\
+\}\
+\
+// \uc0\u9472 \u9472 \u9472  TOAST \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \
+const toastVariants = \{\
+  success: \{ bg: tokens.color.successBg, border: tokens.color.successFg, icon: "\uc0\u9989 " \},\
+  critical: \{ bg: tokens.color.criticalBg, border: tokens.color.negativeFg, icon: "\uc0\u10060 " \},\
+  warning: \{ bg: tokens.color.warningBg, border: tokens.color.criticalFg, icon: "\uc0\u9888 \u65039 " \},\
+  info: \{ bg: tokens.color.infoBg, border: tokens.color.infoFg, icon: "\uc0\u8505 \u65039 " \},\
+\};\
+\
+export function Toast(\{ variant = "info", message = "Notification message here", actionLabel, onAction, onClose \}) \{\
+  const v = toastVariants[variant];\
+  return (\
+    <div style=\{\{\
+      display: "flex", alignItems: "center", gap: tokens.spacing.md,\
+      background: v.bg, border: `1px solid $\{v.border\}`,\
+      borderRadius: tokens.radius.container, padding: tokens.spacing.md,\
+      boxShadow: tokens.shadow.light, width: "100%",\
+    \}\}>\
+      <span style=\{\{ fontSize: 18 \}\}>\{v.icon\}</span>\
+      <span style=\{\{ flex: 1, ...tokens.font.bodyRegular, color: tokens.color.bodyText \}\}>\{message\}</span>\
+      \{actionLabel && <Button variant="secondary" size="sm" label=\{actionLabel\} onClick=\{onAction\} />\}\
+      <span onClick=\{onClose\} style=\{\{ cursor: "pointer", color: tokens.color.bodyText, fontSize: 14 \}\}>\uc0\u10005 </span>\
+    </div>\
+  );\
+\}\
+\
+// \uc0\u9472 \u9472 \u9472  TOGGLE \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \
+export function Toggle(\{ checked, onChange, disabled \}) \{\
+  return (\
+    <div\
+      onClick=\{() => !disabled && onChange(!checked)\}\
+      style=\{\{\
+        display: "inline-flex", alignItems: "center",\
+        width: 48, height: 26, borderRadius: 13,\
+        background: checked ? tokens.color.neutral600 : tokens.color.ghostActive,\
+        position: "relative", cursor: disabled ? "not-allowed" : "pointer",\
+        transition: "background 0.2s",\
+        opacity: disabled ? 0.5 : 1,\
+      \}\}\
+    >\
+      <div style=\{\{\
+        position: "absolute",\
+        left: checked ? 24 : 2,\
+        width: 22, height: 22, borderRadius: "50%",\
+        background: checked ? tokens.color.neutral800 : "#999999",\
+        display: "flex", alignItems: "center", justifyContent: "center",\
+        transition: "left 0.2s",\
+        color: "#fff", fontSize: 10,\
+      \}\}>\
+        \{checked ? "\uc0\u10003 " : "\u10005 "\}\
+      </div>\
+    </div>\
+  );\
+\}\
+\
+// \uc0\u9472 \u9472 \u9472  CHECKBOX \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \
+export function Checkbox(\{ checked, onChange, label, disabled, error, errorMessage \}) \{\
+  return (\
+    <div style=\{\{ display: "flex", flexDirection: "column", gap: tokens.spacing.xs \}\}>\
+      <label style=\{\{ display: "flex", alignItems: "center", gap: tokens.spacing.sm, cursor: disabled ? "not-allowed" : "pointer", opacity: disabled ? 0.5 : 1 \}\}>\
+        <div\
+          onClick=\{() => !disabled && onChange(!checked)\}\
+          style=\{\{\
+            width: 16, height: 16, borderRadius: 3, flexShrink: 0,\
+            border: `2px solid $\{error ? tokens.color.negativeFg : checked ? tokens.color.bodyText : tokens.color.bodyText\}`,\
+            background: checked ? tokens.color.bodyText : tokens.color.container,\
+            display: "flex", alignItems: "center", justifyContent: "center",\
+            color: "#fff", fontSize: 10,\
+          \}\}\
+        >\
+          \{checked && "\uc0\u10003 "\}\
+        </div>\
+        <span style=\{\{ ...tokens.font.bodyRegular, color: disabled ? tokens.color.disabledText : tokens.color.bodyText \}\}>\{label\}</span>\
+      </label>\
+      \{error && errorMessage && (\
+        <div style=\{\{ display: "flex", alignItems: "center", gap: tokens.spacing.xs \}\}>\
+          <span style=\{\{ color: tokens.color.negativeFg, fontSize: 12 \}\}>\uc0\u10071 </span>\
+          <span style=\{\{ ...tokens.font.bodySmall, color: tokens.color.negativeFg \}\}>\{errorMessage\}</span>\
+        </div>\
+      )\}\
+    </div>\
+  );\
+\}\
+\
+// \uc0\u9472 \u9472 \u9472  RADIO \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \
+export function Radio(\{ checked, onChange, label, disabled, error, errorMessage \}) \{\
+  return (\
+    <div style=\{\{ display: "flex", flexDirection: "column", gap: tokens.spacing.xs \}\}>\
+      <label style=\{\{ display: "flex", alignItems: "center", gap: tokens.spacing.sm, cursor: disabled ? "not-allowed" : "pointer", opacity: disabled ? 0.5 : 1 \}\}>\
+        <div\
+          onClick=\{() => !disabled && onChange()\}\
+          style=\{\{\
+            width: 16, height: 16, borderRadius: "50%", flexShrink: 0,\
+            border: `2px solid $\{error ? tokens.color.negativeFg : tokens.color.bodyText\}`,\
+            background: tokens.color.container,\
+            display: "flex", alignItems: "center", justifyContent: "center",\
+          \}\}\
+        >\
+          \{checked && <div style=\{\{ width: 8, height: 8, borderRadius: "50%", background: tokens.color.bodyText \}\} />\}\
+        </div>\
+        <span style=\{\{ ...tokens.font.bodyRegular, color: disabled ? tokens.color.disabledText : tokens.color.bodyText \}\}>\{label\}</span>\
+      </label>\
+      \{error && errorMessage && (\
+        <div style=\{\{ display: "flex", alignItems: "center", gap: tokens.spacing.xs \}\}>\
+          <span style=\{\{ color: tokens.color.negativeFg, fontSize: 12 \}\}>\uc0\u10071 </span>\
+          <span style=\{\{ ...tokens.font.bodySmall, color: tokens.color.negativeFg \}\}>\{errorMessage\}</span>\
+        </div>\
+      )\}\
+    </div>\
+  );\
+\}\
+\
+// \uc0\u9472 \u9472 \u9472  BREADCRUMB \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \
+export function Breadcrumb(\{ items = [] \}) \{\
+  return (\
+    <div style=\{\{ display: "flex", alignItems: "center", gap: tokens.spacing.xs \}\}>\
+      \{items.map((item, i) => (\
+        <span key=\{i\} style=\{\{ display: "flex", alignItems: "center", gap: tokens.spacing.xs \}\}>\
+          \{i > 0 && <span style=\{\{ ...tokens.font.bodyRegular, color: tokens.color.bodyText \}\}>/</span>\}\
+          <span style=\{\{\
+            ...tokens.font.bodyRegular,\
+            color: item.current ? tokens.color.headerText : tokens.color.bodyText,\
+            fontWeight: item.current ? 700 : 400,\
+            cursor: item.href ? "pointer" : "default",\
+            textDecoration: "none",\
+          \}\}>\
+            \{item.label\}\
+          </span>\
+        </span>\
+      ))\}\
+    </div>\
+  );\
+\}\
+\
+// \uc0\u9472 \u9472 \u9472  TABS \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \
+export function Tabs(\{ tabs = [], activeTab, onChange \}) \{\
+  return (\
+    <div style=\{\{ borderBottom: `1px solid $\{tokens.color.neutral200\}` \}\}>\
+      <div style=\{\{ display: "flex", gap: tokens.spacing.md \}\}>\
+        \{tabs.map((tab) => \{\
+          const isActive = tab.id === activeTab;\
+          return (\
+            <button\
+              key=\{tab.id\}\
+              onClick=\{() => onChange(tab.id)\}\
+              style=\{\{\
+                background: "none", border: "none", cursor: "pointer",\
+                padding: `$\{tokens.spacing.sm\}px 0`,\
+                borderBottom: isActive ? `2px solid $\{tokens.color.tabActive\}` : "2px solid transparent",\
+                color: isActive ? tokens.color.tabActive : tokens.color.tabDefault,\
+                ...isActive ? tokens.font.bodyBold : tokens.font.bodyRegular,\
+                marginBottom: -1,\
+              \}\}\
+            >\
+              \{tab.label\}\
+            </button>\
+          );\
+        \})\}\
+      </div>\
+    </div>\
+  );\
+\}\
+\
+// \uc0\u9472 \u9472 \u9472  TOOLTIP \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \
+export function Tooltip(\{ content, children \}) \{\
+  const [visible, setVisible] = useState(false);\
+  return (\
+    <div style=\{\{ position: "relative", display: "inline-flex" \}\}\
+      onMouseEnter=\{() => setVisible(true)\}\
+      onMouseLeave=\{() => setVisible(false)\}>\
+      \{children\}\
+      \{visible && (\
+        <div style=\{\{\
+          position: "absolute", bottom: "calc(100% + 8px)", left: "50%",\
+          transform: "translateX(-50%)",\
+          background: tokens.color.neutral800, color: tokens.color.bodyWhite,\
+          borderRadius: tokens.spacing.sm, padding: `$\{tokens.spacing.sm\}px $\{tokens.spacing.md\}px`,\
+          ...tokens.font.tooltip, whiteSpace: "nowrap", zIndex: 100,\
+          boxShadow: tokens.shadow.dark,\
+        \}\}>\
+          \{content\}\
+          <div style=\{\{\
+            position: "absolute", top: "100%", left: "50%", transform: "translateX(-50%)",\
+            border: "5px solid transparent", borderTopColor: tokens.color.neutral800,\
+          \}\} />\
+        </div>\
+      )\}\
+    </div>\
+  );\
+\}\
+\
+// \uc0\u9472 \u9472 \u9472  FORM INPUT \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \
+export function FormInput(\{ label, placeholder = "Search or select...", value, onChange, disabled, error, errorMessage, helperText, type = "text", showDropdown \}) \{\
+  const [focused, setFocused] = useState(false);\
+  const borderColor = error ? tokens.color.negativeFg : focused ? tokens.color.focus : tokens.color.neutral300;\
+  return (\
+    <div style=\{\{ display: "flex", flexDirection: "column", gap: tokens.spacing.xs \}\}>\
+      \{label && (\
+        <label style=\{\{ ...tokens.font.bodyBold, color: tokens.color.headerText, display: "flex", alignItems: "center", gap: tokens.spacing.xs \}\}>\
+          \{label\} <span style=\{\{ color: tokens.color.neutral400, fontWeight: 400 \}\}>\uc0\u9432 </span>\
+        </label>\
+      )\}\
+      <div style=\{\{ position: "relative" \}\}>\
+        <input\
+          type=\{type\} value=\{value\} onChange=\{(e) => onChange?.(e.target.value)\}\
+          placeholder=\{placeholder\} disabled=\{disabled\}\
+          onFocus=\{() => setFocused(true)\} onBlur=\{() => setFocused(false)\}\
+          style=\{\{\
+            width: "100%", height: 36, padding: `0 $\{tokens.spacing.md\}px`,\
+            border: `1px solid $\{borderColor\}`,\
+            borderRadius: tokens.radius.button,\
+            background: disabled ? tokens.color.inputDisabled : tokens.color.inputDefault,\
+            color: disabled ? tokens.color.disabledText : tokens.color.bodyText,\
+            ...tokens.font.bodyRegular,\
+            outline: "none", boxSizing: "border-box",\
+            paddingRight: showDropdown ? 36 : tokens.spacing.md,\
+          \}\}\
+        />\
+        \{showDropdown && (\
+          <span style=\{\{ position: "absolute", right: tokens.spacing.sm, top: "50%", transform: "translateY(-50%)", color: tokens.color.bodyText, pointerEvents: "none" \}\}>\uc0\u8744 </span>\
+        )\}\
+      </div>\
+      \{helperText && <span style=\{\{ ...tokens.font.bodySmall, color: tokens.color.disabledText \}\}>\{helperText\}</span>\}\
+      \{error && errorMessage && (\
+        <div style=\{\{ display: "flex", alignItems: "center", gap: tokens.spacing.xs \}\}>\
+          <span style=\{\{ color: tokens.color.negativeFg, fontSize: 12 \}\}>\uc0\u10071 </span>\
+          <span style=\{\{ ...tokens.font.bodySmall, color: tokens.color.negativeFg \}\}>\{errorMessage\}</span>\
+        </div>\
+      )\}\
+    </div>\
+  );\
+\}\
+\
+// \uc0\u9472 \u9472 \u9472  MODAL \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \
+export function Modal(\{ open, onClose, title, description, children, size = "md", onSave \}) \{\
+  if (!open) return null;\
+  const width = size === "lg" ? 800 : 500;\
+  return (\
+    <div style=\{\{\
+      position: "fixed", inset: 0, background: `$\{tokens.color.modalBackground\}CC`,\
+      display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1000,\
+    \}\}>\
+      <div style=\{\{\
+        background: tokens.color.modal, borderRadius: tokens.radius.card,\
+        width, maxWidth: "90vw", boxShadow: tokens.shadow.dark,\
+        display: "flex", flexDirection: "column",\
+      \}\}>\
+        <div style=\{\{ padding: tokens.spacing.lg \}\}>\
+          <div style=\{\{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" \}\}>\
+            <div>\
+              <div style=\{\{ ...tokens.font.title2, color: tokens.color.headerText, marginBottom: tokens.spacing.xs \}\}>\{title\}</div>\
+              \{description && <div style=\{\{ ...tokens.font.bodyRegular, color: tokens.color.bodyText \}\}>\{description\}</div>\}\
+            </div>\
+            <span onClick=\{onClose\} style=\{\{ cursor: "pointer", color: tokens.color.bodyText, fontSize: 18, lineHeight: 1 \}\}>\uc0\u10005 </span>\
+          </div>\
+        </div>\
+        <div style=\{\{ height: 1, background: tokens.color.neutral200 \}\} />\
+        \{children && <div style=\{\{ padding: tokens.spacing.lg \}\}>\{children\}</div>\}\
+        <div style=\{\{ height: 1, background: tokens.color.neutral200 \}\} />\
+        <div style=\{\{ padding: tokens.spacing.lg, display: "flex", justifyContent: "flex-end", gap: tokens.spacing.sm \}\}>\
+          <Button variant="secondary" label="Cancel" onClick=\{onClose\} />\
+          <Button variant="primary" label="Save" onClick=\{onSave\} />\
+        </div>\
+      </div>\
+    </div>\
+  );\
+\}\
+\
+// \uc0\u9472 \u9472 \u9472  SIDEBAR \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \
+export function Sidebar(\{ items = [], activeItem, onItemClick, collapsed, onToggle \}) \{\
+  return (\
+    <div style=\{\{\
+      width: collapsed ? 60 : 220, minHeight: "100vh",\
+      background: tokens.color.verticalBg,\
+      display: "flex", flexDirection: "column",\
+      borderRadius: `0 $\{tokens.radius.card\}px $\{tokens.radius.card\}px 0`,\
+      transition: "width 0.2s ease", flexShrink: 0,\
+    \}\}>\
+      <div style=\{\{ padding: tokens.spacing.md, display: "flex", alignItems: "center", justifyContent: collapsed ? "center" : "space-between", borderBottom: `1px solid $\{tokens.color.verticalActiveBg\}` \}\}>\
+        <div style=\{\{ color: tokens.color.brandPrimary, fontSize: 20 \}\}>\uc0\u9672 </div>\
+        \{!collapsed && <span style=\{\{ color: tokens.color.bodyWhite, ...tokens.font.bodyBold, letterSpacing: 1 \}\}>SOJERN</span>\}\
+        \{!collapsed && <span onClick=\{onToggle\} style=\{\{ color: tokens.color.bodyWhite, cursor: "pointer", fontSize: 12 \}\}>\'8b</span>\}\
+        \{collapsed && <span onClick=\{onToggle\} style=\{\{ color: tokens.color.bodyWhite, cursor: "pointer", fontSize: 12, position: "absolute", left: 50 \}\}>\'9b</span>\}\
+      </div>\
+      <div style=\{\{ flex: 1, padding: `$\{tokens.spacing.sm\}px 0` \}\}>\
+        \{items.map((item) => \{\
+          const isActive = item.id === activeItem;\
+          return (\
+            <div key=\{item.id\} onClick=\{() => onItemClick(item.id)\}\
+              style=\{\{\
+                display: "flex", alignItems: "center", gap: tokens.spacing.sm,\
+                padding: `$\{tokens.spacing.sm\}px $\{tokens.spacing.md\}px`,\
+                background: isActive ? tokens.color.verticalActiveBg : "transparent",\
+                borderLeft: isActive ? `3px solid $\{tokens.color.verticalActiveBorder\}` : "3px solid transparent",\
+                cursor: "pointer", color: tokens.color.bodyWhite,\
+                ...isActive ? tokens.font.bodyBold : tokens.font.bodyRegular,\
+                transition: "all 0.15s",\
+              \}\}>\
+              <span style=\{\{ fontSize: 16, flexShrink: 0 \}\}>\{item.icon\}</span>\
+              \{!collapsed && <span>\{item.label\}</span>\}\
+            </div>\
+          );\
+        \})\}\
+      </div>\
+      <div style=\{\{ padding: `$\{tokens.spacing.sm\}px 0`, borderTop: `1px solid $\{tokens.color.verticalActiveBg\}` \}\}>\
+        \{[\{ icon: "\uc0\u9432 ", label: "Help" \}, \{ icon: "\u55357 \u56420 ", label: "Account" \}].map((item, i) => (\
+          <div key=\{i\} style=\{\{ display: "flex", alignItems: "center", gap: tokens.spacing.sm, padding: `$\{tokens.spacing.sm\}px $\{tokens.spacing.md\}px`, cursor: "pointer", color: tokens.color.bodyWhite, ...tokens.font.bodyRegular \}\}>\
+            <span>\{item.icon\}</span>\
+            \{!collapsed && <span>\{item.label\}</span>\}\
+          </div>\
+        ))\}\
+      </div>\
+    </div>\
+  );\
+\}\
+\
+// \uc0\u9472 \u9472 \u9472  TABLE \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \
+export function Table(\{ columns = [], rows = [], onSort, sortConfig, selectedRows, onRowSelect, onSelectAll \}) \{\
+  return (\
+    <div style=\{\{ background: tokens.color.container, borderRadius: tokens.radius.card, boxShadow: tokens.shadow.light, overflow: "hidden" \}\}>\
+      <table style=\{\{ width: "100%", borderCollapse: "collapse" \}\}>\
+        <thead>\
+          <tr style=\{\{ borderBottom: `1px solid $\{tokens.color.neutral200\}` \}\}>\
+            <th style=\{\{ padding: `$\{tokens.spacing.sm\}px $\{tokens.spacing.md\}px`, width: 40 \}\}>\
+              <Checkbox checked=\{selectedRows?.length === rows.length\} onChange=\{onSelectAll\} />\
+            </th>\
+            \{columns.map((col) => (\
+              <th key=\{col.key\} onClick=\{() => onSort?.(col.key)\}\
+                style=\{\{ padding: `$\{tokens.spacing.sm\}px $\{tokens.spacing.md\}px`, textAlign: "left", cursor: col.sortable ? "pointer" : "default", ...tokens.font.bodyBold, color: tokens.color.bodyText, background: sortConfig?.key === col.key ? tokens.color.containerWithin : "transparent" \}\}>\
+                <div style=\{\{ display: "flex", alignItems: "center", gap: tokens.spacing.xs \}\}>\
+                  \{col.label\}\
+                  \{col.sortable && <span style=\{\{ fontSize: 10 \}\}>\{sortConfig?.key === col.key ? (sortConfig.dir === "asc" ? "\uc0\u8593 " : "\u8595 ") : "\u8593 \u8595 "\}</span>\}\
+                </div>\
+              </th>\
+            ))\}\
+          </tr>\
+        </thead>\
+        <tbody>\
+          \{rows.map((row, i) => \{\
+            const isSelected = selectedRows?.includes(row.id);\
+            return (\
+              <tr key=\{i\} style=\{\{ borderBottom: `1px solid $\{tokens.color.neutral200\}`, background: isSelected ? tokens.color.selected : "transparent" \}\}>\
+                <td style=\{\{ padding: `$\{tokens.spacing.sm\}px $\{tokens.spacing.md\}px` \}\}>\
+                  <Checkbox checked=\{isSelected\} onChange=\{() => onRowSelect(row.id)\} />\
+                </td>\
+                \{columns.map((col) => (\
+                  <td key=\{col.key\} style=\{\{ padding: `$\{tokens.spacing.sm\}px $\{tokens.spacing.md\}px`, ...tokens.font.bodyRegular, color: tokens.color.bodyText \}\}>\
+                    \{col.render ? col.render(row[col.key], row) : row[col.key]\}\
+                  </td>\
+                ))\}\
+              </tr>\
+            );\
+          \})\}\
+        </tbody>\
+      </table>\
+    </div>\
+  );\
+\}\
+\
+// \uc0\u9472 \u9472 \u9472  PAGINATION \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \
+export function Pagination(\{ currentPage, totalPages, totalItems, rowsPerPage, onPageChange, onRowsPerPageChange \}) \{\
+  const start = (currentPage - 1) * rowsPerPage + 1;\
+  const end = Math.min(currentPage * rowsPerPage, totalItems);\
+  const pages = [];\
+  if (totalPages <= 6) \{\
+    for (let i = 1; i <= totalPages; i++) pages.push(i);\
+  \} else \{\
+    pages.push(1);\
+    if (currentPage > 3) pages.push("...");\
+    for (let i = Math.max(2, currentPage - 1); i <= Math.min(totalPages - 1, currentPage + 1); i++) pages.push(i);\
+    if (currentPage < totalPages - 2) pages.push("...");\
+    pages.push(totalPages);\
+  \}\
+  return (\
+    <div style=\{\{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: `$\{tokens.spacing.sm\}px $\{tokens.spacing.md\}px`, background: tokens.color.container \}\}>\
+      <div style=\{\{ display: "flex", alignItems: "center", gap: tokens.spacing.sm \}\}>\
+        <span style=\{\{ ...tokens.font.bodyRegular, color: tokens.color.bodyText \}\}>Rows per page</span>\
+        <select value=\{rowsPerPage\} onChange=\{(e) => onRowsPerPageChange(Number(e.target.value))\}\
+          style=\{\{ border: `1px solid $\{tokens.color.neutral300\}`, borderRadius: tokens.radius.button, padding: `$\{tokens.spacing.xs\}px $\{tokens.spacing.sm\}px`, ...tokens.font.bodyRegular, color: tokens.color.bodyText \}\}>\
+          \{[10, 25, 50].map(n => <option key=\{n\} value=\{n\}>\{n\}</option>)\}\
+        </select>\
+        <span style=\{\{ ...tokens.font.bodyRegular, color: tokens.color.bodyText \}\}>\{start\}-\{end\} of \{totalItems\}</span>\
+      </div>\
+      <div style=\{\{ display: "flex", alignItems: "center", gap: tokens.spacing.xs \}\}>\
+        <button onClick=\{() => onPageChange(currentPage - 1)\} disabled=\{currentPage === 1\}\
+          style=\{\{ background: "none", border: "none", cursor: currentPage === 1 ? "not-allowed" : "pointer", color: currentPage === 1 ? tokens.color.disabled : tokens.color.bodyText, fontSize: 16 \}\}>\'8b</button>\
+        \{pages.map((p, i) => (\
+          <button key=\{i\} onClick=\{() => typeof p === "number" && onPageChange(p)\}\
+            style=\{\{ background: "none", border: "none", cursor: typeof p === "number" ? "pointer" : "default", color: p === currentPage ? tokens.color.brandPrimary : tokens.color.bodyText, fontWeight: p === currentPage ? 700 : 400, ...tokens.font.bodyRegular, minWidth: 24 \}\}>\
+            \{p\}\
+          </button>\
+        ))\}\
+        <button onClick=\{() => onPageChange(currentPage + 1)\} disabled=\{currentPage === totalPages\}\
+          style=\{\{ background: "none", border: "none", cursor: currentPage === totalPages ? "not-allowed" : "pointer", color: currentPage === totalPages ? tokens.color.disabled : tokens.color.bodyText, fontSize: 16 \}\}>\'9b</button>\
+      </div>\
+    </div>\
+  );\
+\}\
+\
+// \uc0\u9472 \u9472 \u9472  CARD \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \
+export function Card(\{ title, subtitle, metrics = [], variant = "horizontal" \}) \{\
+  return (\
+    <div style=\{\{ background: tokens.color.container, borderRadius: tokens.radius.card, boxShadow: tokens.shadow.light, padding: tokens.spacing.lg \}\}>\
+      <div style=\{\{ marginBottom: tokens.spacing.md \}\}>\
+        <div style=\{\{ display: "flex", alignItems: "center", gap: tokens.spacing.xs \}\}>\
+          <span style=\{\{ ...tokens.font.title3, color: tokens.color.headerText \}\}>\{title\}</span>\
+          <span style=\{\{ color: tokens.color.neutral400 \}\}>\uc0\u9432 </span>\
+        </div>\
+        \{subtitle && <div style=\{\{ ...tokens.font.bodySmall, color: tokens.color.bodyText \}\}>\{subtitle\}</div>\}\
+      </div>\
+      <div style=\{\{ display: "flex", gap: tokens.spacing.sm, flexWrap: variant === "grid" ? "wrap" : "nowrap" \}\}>\
+        \{metrics.map((m, i) => (\
+          <div key=\{i\} style=\{\{ flex: 1, background: tokens.color.containerWithin, borderRadius: tokens.radius.button, padding: tokens.spacing.sm, display: "flex", justifyContent: "space-between", alignItems: "center" \}\}>\
+            <div style=\{\{ display: "flex", alignItems: "center", gap: tokens.spacing.xs \}\}>\
+              <span style=\{\{ ...tokens.font.bodySmall, color: tokens.color.bodyText \}\}>\{m.label\}</span>\
+              <span style=\{\{ color: tokens.color.neutral400, fontSize: 10 \}\}>\uc0\u9432 </span>\
+            </div>\
+            <span style=\{\{ ...tokens.font.title3, color: tokens.color.bodyText \}\}>\{m.value\}</span>\
+          </div>\
+        ))\}\
+      </div>\
+    </div>\
+  );\
+\}\
+\
+// \uc0\u9472 \u9472 \u9472  STEPPER \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \
+export function Stepper(\{ steps = [], currentStep \}) \{\
+  return (\
+    <div style=\{\{ display: "flex", alignItems: "flex-start", gap: 0 \}\}>\
+      \{steps.map((step, i) => \{\
+        const isComplete = i < currentStep;\
+        const isActive = i === currentStep;\
+        return (\
+          <div key=\{i\} style=\{\{ display: "flex", alignItems: "center", flex: i < steps.length - 1 ? 1 : 0 \}\}>\
+            <div style=\{\{ display: "flex", flexDirection: "column", alignItems: "center", gap: tokens.spacing.xs \}\}>\
+              <div style=\{\{\
+                width: 28, height: 28, borderRadius: "50%",\
+                background: isComplete ? tokens.color.successFg : "transparent",\
+                border: isComplete ? "none" : `2px solid $\{isActive ? tokens.color.brandPrimary : tokens.color.neutral300\}`,\
+                display: "flex", alignItems: "center", justifyContent: "center",\
+                color: isComplete ? "#fff" : isActive ? tokens.color.brandPrimary : tokens.color.neutral300,\
+                fontSize: 12, fontWeight: 700,\
+              \}\}>\
+                \{isComplete ? "\uc0\u10003 " : isActive ? <div style=\{\{ width: 10, height: 10, borderRadius: "50%", background: tokens.color.brandPrimary \}\} /> : ""\}\
+              </div>\
+              <span style=\{\{ ...tokens.font.bodySmall, fontWeight: isActive || isComplete ? 700 : 400, color: isActive || isComplete ? tokens.color.headerText : tokens.color.disabledText, whiteSpace: "nowrap" \}\}>\
+                \{step\}\
+              </span>\
+            </div>\
+            \{i < steps.length - 1 && (\
+              <div style=\{\{ flex: 1, height: 1, background: isComplete ? tokens.color.specialEnabled : tokens.color.neutral300, marginBottom: tokens.spacing.lg, minWidth: 40 \}\} />\
+            )\}\
+          </div>\
+        );\
+      \})\}\
+    </div>\
+  );\
+\}\
+\
+// \uc0\u9472 \u9472 \u9472  PAGE LAYOUT \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \
+export function PageLayout(\{ children, sidebarItems, activeItem, onSidebarItemClick, title, breadcrumbs, actions \}) \{\
+  const [collapsed, setCollapsed] = useState(false);\
+  return (\
+    <div style=\{\{ display: "flex", minHeight: "100vh", background: tokens.color.page, fontFamily: "Inter, sans-serif" \}\}>\
+      <Sidebar items=\{sidebarItems || []\} activeItem=\{activeItem\} onItemClick=\{onSidebarItemClick || (() => \{\})\} collapsed=\{collapsed\} onToggle=\{() => setCollapsed(!collapsed)\} />\
+      <div style=\{\{ flex: 1, padding: tokens.spacing.lg, overflow: "auto" \}\}>\
+        \{breadcrumbs && <div style=\{\{ marginBottom: tokens.spacing.sm \}\}><Breadcrumb items=\{breadcrumbs\} /></div>\}\
+        <div style=\{\{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: tokens.spacing.lg \}\}>\
+          <h1 style=\{\{ ...tokens.font.title1, color: tokens.color.headerText, margin: 0 \}\}>\{title\}</h1>\
+          \{actions && <div style=\{\{ display: "flex", gap: tokens.spacing.sm \}\}>\{actions\}</div>\}\
+        </div>\
+        \{children\}\
+      </div>\
+    </div>\
+  );\
+\}\
+\
+// \uc0\u9472 \u9472 \u9472  DEMO SHOWCASE \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \u9472 \
+export default function DesignSystem() \{\
+  const [activeTab, setActiveTab] = useState("buttons");\
+  const [checked, setChecked] = useState(false);\
+  const [radioVal, setRadioVal] = useState(false);\
+  const [toggleOn, setToggleOn] = useState(false);\
+  const [modalOpen, setModalOpen] = useState(false);\
+  const [currentPage, setCurrentPage] = useState(1);\
+  const [rowsPerPage, setRowsPerPage] = useState(25);\
+  const [selectedRows, setSelectedRows] = useState([]);\
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);\
+  const [activeSidebarItem, setActiveSidebarItem] = useState("dashboard");\
+  const [sortConfig, setSortConfig] = useState(\{ key: "date", dir: "desc" \});\
+\
+  const sidebarItems = [\
+    \{ id: "dashboard", icon: "\uc0\u8862 ", label: "Dashboard" \},\
+    \{ id: "reporting", icon: "\uc0\u55357 \u56522 ", label: "Reporting" \},\
+    \{ id: "billing", icon: "\uc0\u55358 \u56830 ", label: "Billing" \},\
+    \{ id: "admin", icon: "\uc0\u55357 \u56420 ", label: "Admin" \},\
+  ];\
+\
+  const tableColumns = [\
+    \{ key: "name", label: "Account Name", sortable: true \},\
+    \{ key: "id", label: "ID", sortable: true \},\
+    \{ key: "date", label: "Transaction Date", sortable: true \},\
+    \{ key: "docNumber", label: "Document Number", sortable: true \},\
+    \{ key: "amount", label: "Dollars", sortable: true \},\
+    \{ key: "status", label: "Status", sortable: false, render: (val) => <Chip variant="active" label=\{val\} /> \},\
+  ];\
+\
+  const tableRows = [\
+    \{ id: 1, name: "Sunny Beach Resort", id_: "5631740", date: "Feb 5, 2024", docNumber: "10370027", amount: "$6.00 USD", status: "Active" \},\
+    \{ id: 2, name: "Mountain Peak Lodge", id_: "5631740", date: "Feb 5, 2024", docNumber: "10370027", amount: "$6.00 USD", status: "Active" \},\
+    \{ id: 3, name: "Cityscape Suites", id_: "5631740", date: "Feb 5, 2024", docNumber: "10370027", amount: "$6.00 USD", status: "Active" \},\
+    \{ id: 4, name: "Ocean View Inn", id_: "5631740", date: "Feb 3, 2024", docNumber: "10370028", amount: "$6.00 USD", status: "Active" \},\
+    \{ id: 5, name: "Rustic Retreat Cabins", id_: "5631740", date: "Feb 1, 2024", docNumber: "10370029", amount: "$6.00 USD", status: "Active" \},\
+  ].map(r => (\{ ...r, id: r.id, name: r.name, date: r.date, docNumber: r.docNumber, amount: r.amount, status: r.status \}));\
+\
+  const Section = (\{ title, children \}) => (\
+    <div style=\{\{ marginBottom: tokens.spacing.xxl \}\}>\
+      <h2 style=\{\{ ...tokens.font.title3, color: tokens.color.headerText, marginBottom: tokens.spacing.md, paddingBottom: tokens.spacing.sm, borderBottom: `1px solid $\{tokens.color.neutral200\}` \}\}>\{title\}</h2>\
+      \{children\}\
+    </div>\
+  );\
+\
+  const Row = (\{ children, gap = tokens.spacing.sm \}) => (\
+    <div style=\{\{ display: "flex", flexWrap: "wrap", alignItems: "center", gap \}\}>\{children\}</div>\
+  );\
+\
+  return (\
+    <div style=\{\{ fontFamily: "Inter, sans-serif", background: tokens.color.page, minHeight: "100vh" \}\}>\
+      <div style=\{\{ display: "flex" \}\}>\
+        <Sidebar items=\{sidebarItems\} activeItem=\{activeSidebarItem\} onItemClick=\{setActiveSidebarItem\} collapsed=\{sidebarCollapsed\} onToggle=\{() => setSidebarCollapsed(!sidebarCollapsed)\} />\
+        <div style=\{\{ flex: 1, padding: tokens.spacing.lg, maxWidth: "calc(100vw - 60px)", overflow: "auto" \}\}>\
+          <Breadcrumb items=\{[\{ label: "Home" \}, \{ label: "Design System" \}, \{ label: "Components", current: true \}]\} />\
+          <div style=\{\{ display: "flex", justifyContent: "space-between", alignItems: "center", margin: `$\{tokens.spacing.sm\}px 0 $\{tokens.spacing.lg\}px` \}\}>\
+            <h1 style=\{\{ ...tokens.font.title1, color: tokens.color.headerText, margin: 0 \}\}>Sojern Design System</h1>\
+            <Button variant="special" label="Create New" leftIcon="\uc0\u8853 " rightIcon="\u8744 " />\
+          </div>\
+\
+          <Tabs tabs=\{[\
+            \{ id: "buttons", label: "Buttons" \},\
+            \{ id: "forms", label: "Forms" \},\
+            \{ id: "feedback", label: "Feedback" \},\
+            \{ id: "data", label: "Data" \},\
+            \{ id: "layout", label: "Layout" \},\
+          ]\} activeTab=\{activeTab\} onChange=\{setActiveTab\} />\
+\
+          <div style=\{\{ marginTop: tokens.spacing.lg \}\}>\
+\
+            \{activeTab === "buttons" && (\
+              <>\
+                <Section title="Button Variants">\
+                  <Row>\
+                    \{["special", "primary", "secondary", "ghost", "destructive", "link"].map(v => (\
+                      <Button key=\{v\} variant=\{v\} label=\{v.charAt(0).toUpperCase() + v.slice(1)\} leftIcon="\uc0\u8853 " rightIcon="\u8744 " />\
+                    ))\}\
+                  </Row>\
+                </Section>\
+                <Section title="Button Sizes">\
+                  <Row>\
+                    \{["lg", "md", "sm"].map(s => (\
+                      <Button key=\{s\} variant="special" size=\{s\} label=\{`$\{s.toUpperCase()\} Button`\} leftIcon="\uc0\u8853 " rightIcon="\u8744 " />\
+                    ))\}\
+                  </Row>\
+                </Section>\
+                <Section title="Disabled State">\
+                  <Row>\
+                    \{["special", "primary", "secondary", "ghost", "destructive"].map(v => (\
+                      <Button key=\{v\} variant=\{v\} label=\{v\} disabled />\
+                    ))\}\
+                  </Row>\
+                </Section>\
+                <Section title="Chips">\
+                  <Row>\
+                    \{["warning", "success", "error", "active", "information"].map(v => (\
+                      <span key=\{v\} style=\{\{ display: "flex", gap: tokens.spacing.xs \}\}>\
+                        <Chip variant=\{v\} label=\{v.charAt(0).toUpperCase() + v.slice(1)\} dismissible />\
+                        <Chip variant=\{v\} label=\{v.charAt(0).toUpperCase() + v.slice(1)\} />\
+                      </span>\
+                    ))\}\
+                  </Row>\
+                </Section>\
+              </>\
+            )\}\
+\
+            \{activeTab === "forms" && (\
+              <>\
+                <Section title="Form Inputs">\
+                  <div style=\{\{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: tokens.spacing.md, maxWidth: 700 \}\}>\
+                    <FormInput label="Campaign Name" placeholder="Search or select..." showDropdown />\
+                    <FormInput label="Campaign Name" value="Filled out text" showDropdown />\
+                    <FormInput label="Campaign Name" placeholder="Search or select..." showDropdown disabled />\
+                    <FormInput label="Campaign Name" value="Filled out text" showDropdown error errorMessage="Error Message Here" />\
+                  </div>\
+                </Section>\
+                <Section title="Form Controls">\
+                  <Row gap=\{tokens.spacing.lg\}>\
+                    <Checkbox checked=\{checked\} onChange=\{setChecked\} label="Checkbox Text" />\
+                    <Checkbox checked=\{true\} onChange=\{() => \{\}\} label="Checkbox Selected" />\
+                    <Checkbox checked=\{false\} onChange=\{() => \{\}\} label="Checkbox Error" error errorMessage="You must accept the terms to proceed." />\
+                    <Checkbox checked=\{false\} onChange=\{() => \{\}\} label="Disabled" disabled />\
+                  </Row>\
+                  <div style=\{\{ height: tokens.spacing.md \}\} />\
+                  <Row gap=\{tokens.spacing.lg\}>\
+                    <Radio checked=\{radioVal\} onChange=\{() => setRadioVal(!radioVal)\} label="Option" />\
+                    <Radio checked=\{true\} onChange=\{() => \{\}\} label="Selected" />\
+                    <Radio checked=\{false\} onChange=\{() => \{\}\} label="Error" error errorMessage="You must accept the terms to proceed." />\
+                    <Radio checked=\{false\} onChange=\{() => \{\}\} label="Disabled" disabled />\
+                  </Row>\
+                  <div style=\{\{ height: tokens.spacing.md \}\} />\
+                  <Row gap=\{tokens.spacing.lg\}>\
+                    <div style=\{\{ display: "flex", alignItems: "center", gap: tokens.spacing.sm \}\}>\
+                      <Toggle checked=\{toggleOn\} onChange=\{setToggleOn\} />\
+                      <span style=\{\{ ...tokens.font.bodyRegular, color: tokens.color.bodyText \}\}>\{toggleOn ? "On" : "Off"\}</span>\
+                    </div>\
+                    <Toggle checked=\{true\} onChange=\{() => \{\}\} />\
+                    <Toggle checked=\{false\} onChange=\{() => \{\}\} disabled />\
+                  </Row>\
+                </Section>\
+              </>\
+            )\}\
+\
+            \{activeTab === "feedback" && (\
+              <>\
+                <Section title="Toasts">\
+                  <div style=\{\{ display: "flex", flexDirection: "column", gap: tokens.spacing.sm, maxWidth: 700 \}\}>\
+                    \{["success", "critical", "warning", "info"].map(v => (\
+                      <Toast key=\{v\} variant=\{v\} message="Any Exception Code must be documented in Salesforce as agreed upon between Sojern & the customer." actionLabel="Unlocked" />\
+                    ))\}\
+                  </div>\
+                </Section>\
+                <Section title="Tooltips">\
+                  <Row gap=\{tokens.spacing.lg\}>\
+                    <Tooltip content="This is a helpful tooltip">\
+                      <Button variant="secondary" label="Hover me" />\
+                    </Tooltip>\
+                    <Tooltip content=\{<div><div style=\{\{ fontWeight: 700 \}\}>ID: 217049886</div><div>UUs: 100,000,000</div></div>\}>\
+                      <Button variant="ghost" label="Data tooltip" />\
+                    </Tooltip>\
+                  </Row>\
+                </Section>\
+                <Section title="Modal">\
+                  <Button variant="primary" label="Open Modal" onClick=\{() => setModalOpen(true)\} />\
+                  <Modal open=\{modalOpen\} onClose=\{() => setModalOpen(false)\} onSave=\{() => setModalOpen(false)\}\
+                    title="Title" description="Tell us a bit about what you're trying to do and we'll help get you started." />\
+                </Section>\
+                <Section title="Stepper">\
+                  <Stepper steps=\{["Step 1", "Step 2", "Step 3", "Step 4"]\} currentStep=\{1\} />\
+                </Section>\
+              </>\
+            )\}\
+\
+            \{activeTab === "data" && (\
+              <>\
+                <Section title="Cards">\
+                  <div style=\{\{ display: "flex", flexDirection: "column", gap: tokens.spacing.md \}\}>\
+                    <Card title="Title 3" subtitle="Small descriptive text" metrics=\{[\
+                      \{ label: "Description", value: "Metric" \},\
+                      \{ label: "Description", value: "Metric" \},\
+                      \{ label: "Description", value: "Metric" \},\
+                    ]\} />\
+                  </div>\
+                </Section>\
+                <Section title="Table">\
+                  <Table\
+                    columns=\{tableColumns\}\
+                    rows=\{tableRows\}\
+                    selectedRows=\{selectedRows\}\
+                    onRowSelect=\{(id) => setSelectedRows(prev => prev.includes(id) ? prev.filter(r => r !== id) : [...prev, id])\}\
+                    onSelectAll=\{() => setSelectedRows(selectedRows.length === tableRows.length ? [] : tableRows.map(r => r.id))\}\
+                    sortConfig=\{sortConfig\}\
+                    onSort=\{(key) => setSortConfig(prev => (\{ key, dir: prev.key === key && prev.dir === "asc" ? "desc" : "asc" \}))\}\
+                  />\
+                  <div style=\{\{ borderTop: `1px solid $\{tokens.color.neutral200\}` \}\}>\
+                    <Pagination currentPage=\{currentPage\} totalPages=\{10\} totalItems=\{199\} rowsPerPage=\{rowsPerPage\}\
+                      onPageChange=\{setCurrentPage\} onRowsPerPageChange=\{setRowsPerPage\} />\
+                  </div>\
+                </Section>\
+              </>\
+            )\}\
+\
+            \{activeTab === "layout" && (\
+              <>\
+                <Section title="Typography">\
+                  \{[\
+                    \{ label: "Title 1", style: tokens.font.title1, font: "Lato" \},\
+                    \{ label: "Title 2", style: tokens.font.title2, font: "Lato" \},\
+                    \{ label: "Title 3", style: tokens.font.title3, font: "Lato" \},\
+                    \{ label: "Title 4", style: tokens.font.title4, font: "Inter" \},\
+                    \{ label: "Body Regular", style: tokens.font.bodyRegular, font: "Inter" \},\
+                    \{ label: "Body Bold", style: tokens.font.bodyBold, font: "Inter" \},\
+                    \{ label: "Body Small", style: tokens.font.bodySmall, font: "Inter" \},\
+                    \{ label: "Body Small Bold", style: tokens.font.bodySmallBold, font: "Inter" \},\
+                    \{ label: "Tooltip", style: tokens.font.tooltip, font: "Inter" \},\
+                  ].map((\{ label, style, font \}) => (\
+                    <div key=\{label\} style=\{\{ marginBottom: tokens.spacing.sm \}\}>\
+                      <div style=\{\{ ...style, color: tokens.color.headerText \}\}>\{label\}</div>\
+                      <div style=\{\{ ...tokens.font.bodySmall, color: tokens.color.disabledText \}\}>\{font\}, \{style.fontWeight\}, \{style.fontSize\}px</div>\
+                    </div>\
+                  ))\}\
+                </Section>\
+                <Section title="Color Palette">\
+                  <div style=\{\{ display: "flex", flexWrap: "wrap", gap: tokens.spacing.sm \}\}>\
+                    \{[\
+                      \{ name: "Brand Primary", color: tokens.color.brandPrimary \},\
+                      \{ name: "Brand Secondary", color: tokens.color.brandSecondary \},\
+                      \{ name: "Brand Tertiary", color: tokens.color.brandTertiary \},\
+                      \{ name: "Success", color: tokens.color.successFg \},\
+                      \{ name: "Warning", color: tokens.color.criticalFg \},\
+                      \{ name: "Error", color: tokens.color.negativeFg \},\
+                      \{ name: "Info", color: tokens.color.infoFg \},\
+                      \{ name: "Neutral 800", color: tokens.color.neutral800 \},\
+                      \{ name: "Neutral 600", color: tokens.color.neutral600 \},\
+                      \{ name: "Neutral 300", color: tokens.color.neutral300 \},\
+                      \{ name: "Neutral 200", color: tokens.color.neutral200 \},\
+                      \{ name: "Neutral 100", color: tokens.color.neutral100 \},\
+                    ].map((\{ name, color \}) => (\
+                      <div key=\{name\} style=\{\{ display: "flex", flexDirection: "column", alignItems: "center", gap: tokens.spacing.xs \}\}>\
+                        <div style=\{\{ width: 60, height: 60, borderRadius: tokens.radius.button, background: color, border: `1px solid $\{tokens.color.neutral200\}` \}\} />\
+                        <span style=\{\{ ...tokens.font.tooltip, color: tokens.color.bodyText, textAlign: "center", maxWidth: 60 \}\}>\{name\}</span>\
+                        <span style=\{\{ ...tokens.font.tooltip, color: tokens.color.disabledText \}\}>\{color\}</span>\
+                      </div>\
+                    ))\}\
+                  </div>\
+                </Section>\
+              </>\
+            )\}\
+          </div>\
+        </div>\
+      </div>\
+    </div>\
+  );\
+\}}
