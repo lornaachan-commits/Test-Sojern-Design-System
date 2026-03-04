@@ -1,0 +1,87 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2822
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 # Sojern Design System \'97 Cursor Reference\
+\
+## About this repo\
+This is the Sojern component library. All screens and wireframes\
+must be built using components and tokens from DesignSystem.jsx only.\
+\
+## Stack\
+- React (JSX)\
+- Inline styles using the tokens object \'97 no CSS files, no Tailwind\
+- Fonts: Lato (titles) + Inter (body) \'97 load via Google Fonts\
+\
+## Rules \'97 always follow these\
+- ALWAYS import components from ./components/DesignSystem.jsx\
+- NEVER hardcode colors, spacing or font sizes \'97 always use tokens\
+- NEVER create a new component if one already exists in DesignSystem.jsx\
+- ALL new pages go in the /pages folder\
+- ALWAYS use PageLayout as the wrapper for every new page\
+- ALWAYS use the Sidebar component with the correct nav items\
+- ALWAYS use Breadcrumb at the top of every page\
+\
+## Brand\
+- Brand Primary (orange): #E35F3E \'97 used for CTAs, active states\
+- Brand Secondary (dark navy): #242452 \'97 used for sidebar, headers\
+- Brand Tertiary (steel blue): #647D94 \'97 used for hover states\
+- Page background: #F8F8F8\
+- Container background: #FFFFFF\
+\
+## Typography\
+- Titles: Lato font\
+- Body/UI: Inter font\
+- Never use any other font\
+\
+## Available components\
+Import any of these from DesignSystem.jsx:\
+\
+| Component | Usage |\
+|---|---|\
+| Button | variant: special, primary, secondary, ghost, destructive, link |\
+| Chip | variant: warning, success, error, active, information |\
+| Toast | variant: success, critical, warning, info |\
+| Toggle | On/off switch |\
+| Checkbox | Form checkbox with error state |\
+| Radio | Form radio button with error state |\
+| Breadcrumb | Page navigation trail |\
+| Tabs | Horizontal tab navigation |\
+| Tooltip | Hover tooltip, data or info variant |\
+| FormInput | Text input, dropdown, with all states |\
+| Modal | size: md, lg |\
+| Sidebar | Expanded and collapsed states |\
+| Table | With sorting, selection, chips |\
+| Pagination | With rows per page selector |\
+| Card | Metric display cards |\
+| Stepper | Multi-step wizard progress |\
+| PageLayout | Full page wrapper with sidebar |\
+\
+## Button variants\
+- special = orange (#E35F3E) \'97 primary CTA\
+- primary = dark navy (#26374E) \'97 secondary CTA  \
+- secondary = white with navy border \'97 tertiary action\
+- ghost = transparent \'97 low emphasis\
+- destructive = red (#E02F2F) \'97 delete/remove actions\
+- link = blue (#1362F7) \'97 inline links\
+\
+## Status colors\
+- Success: #488F31 on #E2F9F1\
+- Warning: #C86400 on #FEF7E3\
+- Error: #E02F2F on #F9DFD8\
+- Info: #005A9E on #CBE8FF\
+- Neutral: #333333 on #E0E5EA\
+\
+## Table behaviour\
+- Default sort: date column, descending (newest first)\
+- Selected row background: #F5F1EE\
+- Hover row background: #F8F8F8\
+- Status column uses Chip component\
+\
+## Example prompt to use in Cursor\
+"Using the components in DesignSystem.jsx and following\
+the rules in CLAUDE.md, build me a [page name] page with\
+[list the components you need]"}
